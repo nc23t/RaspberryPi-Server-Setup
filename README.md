@@ -106,7 +106,7 @@ The Nextcloud snap was also granted explicit `removable-media` access, required 
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 | Component | Technology |
 |-----------|------------|
