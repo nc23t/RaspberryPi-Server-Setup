@@ -72,7 +72,7 @@ All uploaded files stay on personal hardware. No third-party cloud provider has 
 ### Dashboard
 ![Nextcloud Dashboard](nexcloud-dashboard.png)
 
-The Nextcloud web interface is accessible at `http://10.86.12.1:8080` when connected to the VPN, and at `http://192.168.1.61:8080` on the local home network.
+The Nextcloud web interface is accessible at `http://10.x.x.x:8080` when connected to the VPN, and at `http://192.x.x.x:8080` on the local home network.
 
 ### Trusted Domain Configuration
 Nextcloud's trusted domains whitelist controls which addresses are allowed to access the instance, adding a layer of security against unauthorized access attempts.
