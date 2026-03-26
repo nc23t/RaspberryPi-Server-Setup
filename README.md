@@ -129,6 +129,49 @@ All devices connect to the server through WireGuard with two tunnel configuratio
 
 ---
 
+
+## Fail2Ban — Brute Force Protection
+
+### What it does
+Fail2Ban monitors system logs for repeated failed login attempts and automatically 
+bans offending IP addresses using firewall rules. It protects the server from 
+brute force attacks targeting SSH and other services.
+
+### Why it matters
+Without Fail2Ban, an attacker can attempt thousands of password combinations 
+against SSH with no consequences. Fail2Ban detects this pattern and blocks the 
+IP at the firewall level before the attack can succeed.
+
+### Configuration
+The default settings were hardened in `/etc/fail2ban/jail.local`:
+
+![Fail2Ban Rules](rules.png)
+
+| Setting | Value | Meaning |
+|--------|-------|---------|
+| `bantime` | 24h | Banned IPs are blocked for 24 hours |
+| `findtime` | 10m | Failed attempts are counted within a 10 minute window |
+| `maxretry` | 3 | 3 failed attempts triggers a ban |
+
+### Service Status
+Fail2Ban runs as a systemd service and is enabled on boot.
+
+![Fail2Ban Status](status.png)
+
+### SSH Jail
+Fail2Ban uses "jails" to monitor specific services. The SSH jail watches 
+`/var/log/auth.log` for failed login attempts and bans any IP that exceeds 
+the retry limit.
+
+![Jail List](Jailnum.png)
+
+![SSH Jail Status](jailList.png)
+
+### Verified Working
+A brute force simulation was performed by attempting SSH logins with an invalid 
+username multiple times. After 3 attempts the source IP was automatically banned, 
+confirming Fail2Ban is actively protecting the server.
+
 ## 🔗 Related Projects
 
 - [Raspberry Pi VPN](https://github.com/nc23t) — WireGuard VPN server setup with Pi-hole integration
